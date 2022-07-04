@@ -1,0 +1,52 @@
+<div class="tab-pane fade show active" id="showActivity" role="tabpanel" aria-labelledby="show-item-tab">
+  <div class="card shadow mb-4 mt-2">
+    <div class="card-header py-3">
+      <a href="/admin/booking" class="btn btn-warning btn-sm">Back</a>
+    </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="/<%= booking.payments.paymentProof %>" alt="<%= booking.payments.paymentProof %>" style="width: 100%">
+          </div>
+
+          <div class="col-md-8">
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Member</th>
+                    <th>Title</th>
+                    <th>Total</th>
+                    <th>From Bank</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                  <tr>
+                    <td><%= booking.memberId.firstName %> <%= booking.memberId.lastName %></td>
+                    <td><%= booking.itemId.title %></td>
+                    <td><%= booking.total %></td>
+                    <td><%= booking.payments.fromBank %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <% if (booking.payments.status == 'Process') { %>
+              <div class="row">
+                <form action="/admin/booking/update?_method=PUT" method="POST">
+                  <input type="hidden" name="id" value="<%= booking.id %>">
+                  <input type="hidden" name="stat" value="Accepted">
+                  <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Accept</button>
+                </form>
+                <form action="/admin/booking/update?_method=PUT" method="POST">
+                  <input type="hidden" name="id" value="<%= booking.id %>">
+                  <input type="hidden" name="stat" value="Rejected">
+                  <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i> Reject</button>
+                </form>
+              </div>
+              <% } %>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

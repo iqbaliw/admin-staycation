@@ -1,0 +1,39 @@
+<div class="tab-pane fade show active" id="showItem" role="tabpanel" aria-labelledby="show-item-tab">
+  <div class="card shadow mb-4 mt-2">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              <% for( let index = 0; index < item.length; index++ ) { %>
+              <tr>
+                <td><%= index + 1 %> </td>
+                <td><%= item[index].title %> </td>
+                <td><%= item[index].price %> </td>
+                <td><%= item[index].country %> </td>
+                <td><%= item[index].city %> </td>
+                <td>
+                  <form action="/admin/item/<%= item[index].id %>/delete?_method=DELETE" method="POST"> 
+                    <a href="/admin/item/show-image/<%= item[index].id %>" class="btn btn-info btn-sm btn-circle"><i class="fas fa-image"></i></a>
+                    <a href="/admin/item/<%= item[index].id %>" type="button" class="btn btn-sm btn-warning btn-circle btn-edit"><i class="fas fa-edit"></i></a>
+                    <button type="submit" class="btn btn-sm btn-danger btn-circle"><i class="fas fa-trash"></i></button>
+                    <a href="/admin/item/show-detail-item/<%= item[index].id %>" class="btn btn-success btn-sm btn-circle"><i class="fas fa-plus"></i></a>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+</div>
